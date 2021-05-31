@@ -275,7 +275,7 @@ draw_bar_chart_plot(df_sample)
 ```
 
 
-![png](output_4_0.png)
+![png](pic/output_4_0.png)
 
 
 
@@ -284,7 +284,7 @@ draw_bar_chart_plot(df_sample,x='age',y='bmi',fig_x=20,fig_y=7)
 ```
 
 
-![png](output_5_0.png)
+![png](pic/output_5_0.png)
 
 
 
@@ -340,7 +340,7 @@ draw_line_plot(df_sample,x='age',y='bmi',hue='smoker')
 ```
 
 
-![png](output_7_0.png)
+![png](pic/output_7_0.png)
 
 
 
@@ -390,7 +390,7 @@ draw_heatmap(uniform_data,annot=True,fmt='.1f',cmap='Wistia')
 ```
 
 
-![png](output_10_0.png)
+![png](pic/output_10_0.png)
 
 
 
@@ -440,7 +440,7 @@ draw_scatter_plot(df_sample,x='bmi',y='charges',hue='children',fig_x=5,fig_y=5)
 ```
 
 
-![png](output_12_0.png)
+![png](pic/output_12_0.png)
 
 
 
@@ -449,7 +449,7 @@ draw_scatter_plot(df_sample,x='bmi',y='charges',style='children',fig_x=5,fig_y=5
 ```
 
 
-![png](output_13_0.png)
+![png](pic/output_13_0.png)
 
 
 
@@ -458,7 +458,7 @@ draw_scatter_plot(df_sample,x='bmi',y='charges',size='children',fig_x=5,fig_y=5)
 ```
 
 
-![png](output_14_0.png)
+![png](pic/output_14_0.png)
 
 
 
@@ -497,7 +497,7 @@ draw_regplot(df_sample,x='bmi',y='charges',fig_x=8,fig_y=8)
 ```
 
 
-![png](output_16_0.png)
+![png](pic/output_16_0.png)
 
 
 
@@ -542,7 +542,7 @@ draw_lmplot(df_sample,x='bmi',y='charges',hue='smoker',fig_x=10,fig_y=10)
 
 
 
-![png](output_18_1.png)
+![png](pic/output_18_1.png)
 
 
 
@@ -589,7 +589,7 @@ draw_swarmplot(df_sample,x='children',y='bmi')
 
 
 
-![png](output_20_1.png)
+![png](pic/output_20_1.png)
 
 
 
@@ -602,7 +602,7 @@ draw_swarmplot(df_sample,x='smoker',y='charges',hue='region')
 
 
 
-![png](output_21_1.png)
+![png](pic/output_21_1.png)
 
 
 
@@ -665,7 +665,7 @@ draw_wordcolud()
 ```
 
 
-![png](output_23_0.png)
+![png](pic/output_23_0.png)
 
 
 
@@ -711,7 +711,7 @@ draw_kde_plot(df_sample,x='bmi',y='charges',hue='smoker')
 ```
 
 
-![png](output_25_0.png)
+![png](pic/output_25_0.png)
 
 
 
@@ -762,7 +762,7 @@ draw_jointplot(df_sample,x='bmi',y='charges',kind='resid')
 
 
 
-![png](output_27_1.png)
+![png](pic/output_27_1.png)
 
 
 
@@ -775,7 +775,7 @@ draw_jointplot(df_sample,x='bmi',y='charges',kind='reg')
 
 
 
-![png](output_28_1.png)
+![png](pic/output_28_1.png)
 
 
 
@@ -788,7 +788,7 @@ draw_jointplot(df_sample,x='bmi',y='charges',kind='hex')
 
 
 
-![png](output_29_1.png)
+![png](pic/output_29_1.png)
 
 
 
@@ -801,7 +801,7 @@ draw_jointplot(df_sample,x='bmi',y='charges',hue='smoker',kind='hist',fig_x=15,f
 
 
 
-![png](output_30_1.png)
+![png](pic/output_30_1.png)
 
 
 
@@ -814,7 +814,7 @@ draw_jointplot(df_sample,x='bmi',y='charges',hue='smoker',kind='scatter')
 
 
 
-![png](output_31_1.png)
+![png](pic/output_31_1.png)
 
 
 
