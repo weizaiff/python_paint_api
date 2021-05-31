@@ -1,225 +1,17 @@
-
-### Python画图教程
-
-封装画图函数的常用功能，方便直接调用画图，
-
-该jupyter notebook中的所有画图函数都汇总在 **paint_func.py** 文件中，方便直接使用
-
-
-```python
 #配置
+
 import pandas as pd
 import numpy as np
 from pandas import DataFrame
 import matplotlib.pyplot as plt
 pd.plotting.register_matplotlib_converters()
 
-%matplotlib inline
 import seaborn as sns
 from wordcloud import WordCloud, STOPWORDS
 from collections import Counter
 print("Setup Complete")
-```
-
-    Setup Complete
 
 
-
-```python
-sample_path='./insurance.csv'
-df_sample=pd.read_csv(sample_path)
-df_sample.head(15)
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>sex</th>
-      <th>bmi</th>
-      <th>children</th>
-      <th>smoker</th>
-      <th>region</th>
-      <th>charges</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>19</td>
-      <td>female</td>
-      <td>27.900</td>
-      <td>0</td>
-      <td>yes</td>
-      <td>southwest</td>
-      <td>16884.92400</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>18</td>
-      <td>male</td>
-      <td>33.770</td>
-      <td>1</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>1725.55230</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>28</td>
-      <td>male</td>
-      <td>33.000</td>
-      <td>3</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>4449.46200</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>33</td>
-      <td>male</td>
-      <td>22.705</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>21984.47061</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>32</td>
-      <td>male</td>
-      <td>28.880</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>3866.85520</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>31</td>
-      <td>female</td>
-      <td>25.740</td>
-      <td>0</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>3756.62160</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>46</td>
-      <td>female</td>
-      <td>33.440</td>
-      <td>1</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>8240.58960</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>37</td>
-      <td>female</td>
-      <td>27.740</td>
-      <td>3</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>7281.50560</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>37</td>
-      <td>male</td>
-      <td>29.830</td>
-      <td>2</td>
-      <td>no</td>
-      <td>northeast</td>
-      <td>6406.41070</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>60</td>
-      <td>female</td>
-      <td>25.840</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northwest</td>
-      <td>28923.13692</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>25</td>
-      <td>male</td>
-      <td>26.220</td>
-      <td>0</td>
-      <td>no</td>
-      <td>northeast</td>
-      <td>2721.32080</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>62</td>
-      <td>female</td>
-      <td>26.290</td>
-      <td>0</td>
-      <td>yes</td>
-      <td>southeast</td>
-      <td>27808.72510</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>23</td>
-      <td>male</td>
-      <td>34.400</td>
-      <td>0</td>
-      <td>no</td>
-      <td>southwest</td>
-      <td>1826.84300</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>56</td>
-      <td>female</td>
-      <td>39.820</td>
-      <td>0</td>
-      <td>no</td>
-      <td>southeast</td>
-      <td>11090.71780</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>27</td>
-      <td>male</td>
-      <td>42.130</td>
-      <td>0</td>
-      <td>yes</td>
-      <td>southeast</td>
-      <td>39611.75770</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
-```python
 #条形图📊
 def draw_bar_chart_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fig_title=None):
     '''
@@ -267,28 +59,8 @@ def draw_bar_chart_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fi
     else:
         #直接使用df的对应列作为y坐标,label_name作为类名
         sns.barplot(data=data,x=x,y=y,hue=hue,ci=ci)
-```
-
-
-```python
-draw_bar_chart_plot(df_sample)
-```
-
-
-![png](pic/output_4_0.png)
-
-
-
-```python
-draw_bar_chart_plot(df_sample,x='age',y='bmi',fig_x=20,fig_y=7)
-```
-
-
-![png](pic/output_5_0.png)
-
-
-
-```python
+        
+        
 #折线图
 def draw_line_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fig_title=None):
     
@@ -332,26 +104,7 @@ def draw_line_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fig_tit
     else:
         #直接使用df的对应列作为y坐标,label_name作为类名
         sns.lineplot(data=data,x=x,y=y,hue=hue,ci=ci)
-```
-
-
-```python
-draw_line_plot(df_sample,x='age',y='bmi',hue='smoker')
-```
-
-
-![png](pic/output_7_0.png)
-
-
-
-```python
-#sample
-import numpy as np
-uniform_data = np.random.rand(10, 12)
-```
-
-
-```python
+        
 #热图
 def draw_heatmap(data,annot=False,fmt=None,vmin=None,vmax=None,cmap='YlGnBu',fig_x=10,fig_y=10,fig_title=None):
     '''
@@ -381,20 +134,6 @@ def draw_heatmap(data,annot=False,fmt=None,vmin=None,vmax=None,cmap='YlGnBu',fig
     sns.heatmap(data=data,annot=annot,fmt=fmt,vmin=vmin,vmax=vmax,cmap=cmap)
 
     
-    
-```
-
-
-```python
-draw_heatmap(uniform_data,annot=True,fmt='.1f',cmap='Wistia')
-```
-
-
-![png](pic/output_10_0.png)
-
-
-
-```python
 #散点图
 def draw_scatter_plot(data,x=None,y=None,hue=None,size=None,style=None,fig_x=10,fig_y=10,fig_title=None):
 
@@ -431,38 +170,6 @@ def draw_scatter_plot(data,x=None,y=None,hue=None,size=None,style=None,fig_x=10,
         sns.scatterplot(data=data,x=x,y=y,hue=hue,size=size,style=style)
 
     
-    
-```
-
-
-```python
-draw_scatter_plot(df_sample,x='bmi',y='charges',hue='children',fig_x=5,fig_y=5)
-```
-
-
-![png](pic/output_12_0.png)
-
-
-
-```python
-draw_scatter_plot(df_sample,x='bmi',y='charges',style='children',fig_x=5,fig_y=5)
-```
-
-
-![png](pic/output_13_0.png)
-
-
-
-```python
-draw_scatter_plot(df_sample,x='bmi',y='charges',size='children',fig_x=5,fig_y=5)
-```
-
-
-![png](pic/output_14_0.png)
-
-
-
-```python
 #带有回归线的散点图
 def draw_regplot(data,x,y,fig_x=10,fig_y=10,fig_title=None):
     '''
@@ -488,20 +195,6 @@ def draw_regplot(data,x,y,fig_x=10,fig_y=10,fig_title=None):
         plt.title(fig_title)
    
     sns.regplot(data=data,x=x,y=y)
-    
-```
-
-
-```python
-draw_regplot(df_sample,x='bmi',y='charges',fig_x=8,fig_y=8)
-```
-
-
-![png](pic/output_16_0.png)
-
-
-
-```python
 #带有多条回归线的散点图
 def draw_lmplot(data,x,y,hue,fig_x=10,fig_y=10,fig_title=None):
     '''
@@ -529,24 +222,6 @@ def draw_lmplot(data,x,y,hue,fig_x=10,fig_y=10,fig_title=None):
         plt.title(fig_title)
    
     sns.lmplot(data=data,x=x,y=y,hue=hue)
-    
-```
-
-
-```python
-draw_lmplot(df_sample,x='bmi',y='charges',hue='smoker',fig_x=10,fig_y=10)
-```
-
-
-    <Figure size 720x720 with 0 Axes>
-
-
-
-![png](pic/output_18_1.png)
-
-
-
-```python
 #群图
 def draw_swarmplot(data,x,y,hue=None,fig_x=10,fig_y=10,fig_title=None):
     '''
@@ -576,37 +251,6 @@ def draw_swarmplot(data,x,y,hue=None,fig_x=10,fig_y=10,fig_title=None):
         plt.title(fig_title)
    
     sns.swarmplot(data=data,x=x,y=y,hue=hue)
-    
-```
-
-
-```python
-draw_swarmplot(df_sample,x='children',y='bmi')
-```
-
-    /Users/van/anaconda/anaconda3/envs/python36/lib/python3.6/site-packages/seaborn/categorical.py:1296: UserWarning: 6.1% of the points cannot be placed; you may want to decrease the size of the markers or use stripplot.
-      warnings.warn(msg, UserWarning)
-
-
-
-![png](pic/output_20_1.png)
-
-
-
-```python
-draw_swarmplot(df_sample,x='smoker',y='charges',hue='region')
-```
-
-    /Users/van/anaconda/anaconda3/envs/python36/lib/python3.6/site-packages/seaborn/categorical.py:1296: UserWarning: 11.4% of the points cannot be placed; you may want to decrease the size of the markers or use stripplot.
-      warnings.warn(msg, UserWarning)
-
-
-
-![png](pic/output_21_1.png)
-
-
-
-```python
 #词云
 def draw_wordcolud(allwords=None,fig_x=30,fig_y=10,fig_title=None):
     #Ref:
@@ -657,19 +301,7 @@ def draw_wordcolud(allwords=None,fig_x=30,fig_y=10,fig_title=None):
     plt.tight_layout(pad=0)
 
     plt.show()
-```
 
-
-```python
-draw_wordcolud()
-```
-
-
-![png](pic/output_23_0.png)
-
-
-
-```python
 #密度分布图
 def draw_kde_plot(data,x,y,hue=None,shade=True,fig_title=None,fig_x=10,fig_y=10):
     
@@ -702,20 +334,7 @@ def draw_kde_plot(data,x,y,hue=None,shade=True,fig_title=None,fig_x=10,fig_y=10)
    
     sns.kdeplot(data=data,x=x,y=y,hue=hue,shade=shade)
     
-    
-```
 
-
-```python
-draw_kde_plot(df_sample,x='bmi',y='charges',hue='smoker')
-```
-
-
-![png](pic/output_25_0.png)
-
-
-
-```python
 #分布图
 def draw_jointplot(data,x,y,hue=None,kind='kde',fig_title=None,fig_x=10,fig_y=10):
     
@@ -750,79 +369,6 @@ def draw_jointplot(data,x,y,hue=None,kind='kde',fig_title=None,fig_x=10,fig_y=10
     sns.jointplot(data=data,x=x,y=y,hue=hue,kind=kind)
     
     
-```
-
-
-```python
-draw_jointplot(df_sample,x='bmi',y='charges',kind='resid')
-```
-
-
-    <Figure size 720x720 with 0 Axes>
-
-
-
-![png](pic/output_27_1.png)
-
-
-
-```python
-draw_jointplot(df_sample,x='bmi',y='charges',kind='reg')
-```
-
-
-    <Figure size 720x720 with 0 Axes>
-
-
-
-![png](pic/output_28_1.png)
-
-
-
-```python
-draw_jointplot(df_sample,x='bmi',y='charges',kind='hex')
-```
-
-
-    <Figure size 720x720 with 0 Axes>
-
-
-
-![png](pic/output_29_1.png)
-
-
-
-```python
-draw_jointplot(df_sample,x='bmi',y='charges',hue='smoker',kind='hist',fig_x=15,fig_y=15)
-```
-
-
-    <Figure size 1080x1080 with 0 Axes>
-
-
-
-![png](pic/output_30_1.png)
-
-
-
-```python
-draw_jointplot(df_sample,x='bmi',y='charges',hue='smoker',kind='scatter')
-```
-
-
-    <Figure size 720x720 with 0 Axes>
-
-
-
-![png](pic/output_31_1.png)
-
-
-
-```python
-
-```
-
-
-```python
-
-```
+    
+        
+        
