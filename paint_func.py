@@ -11,6 +11,30 @@ from wordcloud import WordCloud, STOPWORDS
 from collections import Counter
 print("Setup Complete")
 
+import numpy as np
+def bar_char_show_values(axs, orient="v", space=.01):
+    '''
+    展示barchar上图片的数子
+    '''
+    def _single(ax):
+        if orient == "v":
+            for p in ax.patches:
+                _x = p.get_x() + p.get_width() / 2
+                _y = p.get_y() + p.get_height() + (p.get_height()*0.01)
+                value = '{:.1f}'.format(p.get_height())
+                ax.text(_x, _y, value, ha="center") 
+        elif orient == "h":
+            for p in ax.patches:
+                _x = p.get_x() + p.get_width() + float(space)
+                _y = p.get_y() + p.get_height() - (p.get_height()*0.5)
+                value = '{:.1f}'.format(p.get_width())
+                ax.text(_x, _y, value, ha="left")
+
+    if isinstance(axs, np.ndarray):
+        for idx, ax in np.ndenumerate(axs):
+            _single(ax)
+    else:
+        _single(axs)
 
 #条形图📊
 def draw_bar_chart_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fig_title=None):
@@ -55,10 +79,10 @@ def draw_bar_chart_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fi
     #label===>设置图中label的标签
     if x is  None and y is None:  
         #没有指定列，则所有列全部被使用
-        sns.barplot(data=data,ci=ci) 
+        return sns.barplot(data=data,ci=ci) 
     else:
         #直接使用df的对应列作为y坐标,label_name作为类名
-        sns.barplot(data=data,x=x,y=y,hue=hue,ci=ci)
+        return sns.barplot(data=data,x=x,y=y,hue=hue,ci=ci)
         
         
 #折线图
