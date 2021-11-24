@@ -276,42 +276,44 @@ def draw_swarmplot(data,x,y,hue=None,fig_x=10,fig_y=10,fig_title=None):
    
     sns.swarmplot(data=data,x=x,y=y,hue=hue)
 #词云
-def draw_wordcolud(allwords=None,fig_x=30,fig_y=10,fig_title=None):
-    #Ref:
-    #https://amueller.github.io/word_cloud/
-    #
-    #allwords:word list
-    #
-    #
-    #WordCloud重要参数:
-    #
-    #min_font_size:最小的字体大小default=4
-    #font_step:字体增长的step
-    #max_words:能够画的最多的字
-    #stopwords:停用词（不展示）
-    #background_color:背景颜色
-    #max_font_size:最大的字体尺寸
-    #relative_scaling:字的相对大小，relative_scaling=0时，只考虑rank排名，relative_scaling=1字体大小和重要性的两倍成正比
-    #           default=’auto’即relative_scaling=0.5，此时只考虑词的重要性
-    #repeat：没有达到最大的词数量或者最小的字体大小时，是否重复词云中的word,default=False
-    #include_numbers:是否包含数字default=False
-    #
-    #
-    #fig_x:图的长
-    #fig_y:图的宽
-    #fig_title:图的标题
-
+def draw_wordcolud(allwords=None,font_path = None,fig_x=30,fig_y=10,fig_title=None):
+    '''
+    Ref:
+    https://amueller.github.io/word_cloud/
+    
+    allwords:word list
+    
+    
+    WordCloud重要参数:
+    
+    min_font_size:最小的字体大小default=4
+    font_step:字体增长的step
+    max_words:能够画的最多的字
+    stopwords:停用词（不展示）
+    background_color:背景颜色
+    max_font_size:最大的字体尺寸
+    relative_scaling:字的相对大小，relative_scaling=0时，只考虑rank排名，relative_scaling=1字体大小和重要性的两倍成正比
+               default=’auto’即relative_scaling=0.5，此时只考虑词的重要性
+    repeat：没有达到最大的词数量或者最小的字体大小时，是否重复词云中的word,default=False
+    include_numbers:是否包含数字default=False
+    
+    
+    fig_x:图的长
+    fig_y:图的宽
+    fig_title:图的标题
+    '''
     #默认列表
-    if not allwords:
+    if  allwords is None:
         allwords={'好':1,'不好':0.001,'差':0.001,'优秀':1}
     #根据频率排序
     mostcommon = sorted(Counter(allwords).items(),key=lambda x:x[1],reverse=True)#[('好',0.1),('优秀',0.2),('不好',0.9),('差',0.8),]#FreqDist(allwords).most_common(100)#来自文本中出现频率最高的100个词
 
     #设置中文字体的路径
-    font = '/Library/Fonts/Songti.ttc'
+    
+    #font = '/Library/Fonts/Songti.ttc'
     
     
-    wordcloud = WordCloud(width=1600, height=800,font_path=font,relative_scaling=1,repeat=True, background_color='white', stopwords=STOPWORDS).generate(str(mostcommon))
+    wordcloud = WordCloud(width=1600, height=800,font_path=font_path ,relative_scaling=1,repeat=True, background_color='white', stopwords=STOPWORDS).generate(str(mostcommon))
 
     fig = plt.figure(figsize=(fig_x,fig_y), facecolor='white')
 
@@ -391,6 +393,43 @@ def draw_jointplot(data,x,y,hue=None,kind='kde',fig_title=None,fig_x=10,fig_y=10
         plt.title(fig_title)
    
     sns.jointplot(data=data,x=x,y=y,hue=hue,kind=kind)
+
+    
+    
+#分布图
+def draw_boxplot(data,x=None,y=None,hue=None,fig_title=None,fig_x=10,fig_y=10, palette="Set3"):
+    
+    '''
+    
+    Ref:
+    https://seaborn.pydata.org/generated/seaborn.boxplot.html
+    
+    功能:
+    箱形图--可以对单列数据画图，y可以不指定或者指定为不同的类别
+        参考官方例子：
+            ax = sns.boxplot(x="day", y="total_bill", hue="smoker",
+                 data=tips, palette="Set3")
+    
+    data:Dataframe格式的数据
+    x:横坐标列名
+    y:纵坐标列名
+    hue:不同类别对应的column名字====>对应不同的色调 
+    fig_x:图的长
+    fig_y:图的宽
+    fig_title:图的标题
+    
+    其他参数TODO
+    
+    '''
+    
+     #设置画布大小
+    plt.figure(figsize=(fig_x,fig_y))
+    # 添加标题
+    if fig_title:
+        plt.title(fig_title)
+   
+    sns.boxplot(data=data,x=x,y=y,hue=hue, palette= palette)
+    
     
     
     
