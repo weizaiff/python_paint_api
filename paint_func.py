@@ -12,6 +12,7 @@ from collections import Counter
 print("Setup Complete")
 
 import numpy as np
+   
 def bar_char_show_values(axs, orient="v", space=.01):
     '''
     展示barchar上图片的数子
@@ -37,7 +38,7 @@ def bar_char_show_values(axs, orient="v", space=.01):
         _single(axs)
 
 #条形图📊
-def draw_bar_chart_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fig_title=None):
+def draw_bar_chart_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fig_title=None, rotation =30 ):
     '''
     Ref:
     https://seaborn.pydata.org/generated/seaborn.barplot.html
@@ -71,8 +72,13 @@ def draw_bar_chart_plot(data,x=None,y=None,hue=None,ci=None,fig_x=10,fig_y=10,fi
     
     '''
     
+    
+    
     #设置画布大小
     plt.figure(figsize=(fig_x,fig_y))
+    
+    # x label rotation
+    plt.xticks(rotation=rotation)
     # 添加标题
     if fig_title:
         plt.title(fig_title)
@@ -396,7 +402,7 @@ def draw_jointplot(data,x,y,hue=None,kind='kde',fig_title=None,fig_x=10,fig_y=10
 
     
     
-#分布图
+#箱形图
 def draw_boxplot(data,x=None,y=None,hue=None,fig_title=None,fig_x=10,fig_y=10, palette="Set3"):
     
     '''
