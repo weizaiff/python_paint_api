@@ -1,4 +1,48 @@
 
+## 20240515
+### box plot
+```
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Random test data
+
+def draw_boxplot(all_data, labels, all_titles,x_labels, y_labels, nrows=1, ncols=7,figsize=(9, 4) ):
+    np.random.seed(19680801)
+    #all_data = [np.random.normal(0, std, size=2) for std in range(1, 4)]
+    #labels = ['x1', 'x2', 'x3']
+    
+    fig, ax_list = plt.subplots(nrows=nrows, ncols=ncols, figsize=figsize)
+
+    bplot_list =  []
+    for i_index, i_ax in enumerate(ax_list):
+        
+        # rectangular box plot
+        bplot1 = i_ax.boxplot(all_data[i_index],
+                             vert=True,  # vertical box alignment
+                             patch_artist=True,  # fill with color
+                             labels=labels)  # will be used to label x-ticks
+        i_ax.set_title(all_titles[i_index])
+        
+        bplot_list.append(bplot1)
+        
+        
+    # fill with colors
+    colors = ['pink', 'lightblue', 'lightgreen']
+    for bplot in bplot_list:
+        for patch, color in zip(bplot['boxes'], colors):
+            patch.set_facecolor(color)
+    
+    # adding horizontal grid lines
+    for ax in ax_list:
+        ax.yaxis.grid(True)
+        ax.set_xlabel(x_labels)
+        ax.set_ylabel(y_labels)
+    
+    plt.show()
+```
+
+-------
 ### Python画图教程
 
 封装画图函数的常用功能，方便直接调用画图，
