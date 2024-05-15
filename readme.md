@@ -1,7 +1,9 @@
 
 ## 20240515
 ### box plot
-```
+
+
+```python
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -41,7 +43,7 @@ def draw_boxplot(all_data, labels, all_titles,x_labels, y_labels, nrows=1, ncols
     
     plt.show()
 ```
-
+![image](https://github.com/weizaiff/python_paint_api/blob/master/pic/box_plot.png)
 -------
 ### Python画图教程
 
